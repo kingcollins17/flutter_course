@@ -14,10 +14,12 @@ void main() async {
 ///
 /// Returns a [Future<String>] that either completes with data or throws an error.
 Future<String> future1() {
+  // Completer takes in a type parameter that will be the return type of its future
   final completer = Completer<String>();
 
   // Simulate async work with a delay
   Future.delayed(Duration(seconds: 3), () {
+    // We programmatically complete the future using completer.complete()
     // Uncomment to simulate success:
     // completer.complete('Future 1 Result');
 
