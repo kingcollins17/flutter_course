@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class newFile extends StatelessWidget {
-  const newFile({super.key});
+class WordGuessingGameScreen extends StatelessWidget {
+  const WordGuessingGameScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
