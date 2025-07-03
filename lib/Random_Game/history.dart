@@ -47,7 +47,7 @@ class History extends StatelessWidget {
                           color: controller.guessedWord[reversedIndex].isCorrect
                             ? Colors.green
                             : Colors.red,
-
+      
                         ),),
                          subtitle: Text(controller.guessedWord[reversedIndex].feedback),
                          trailing: Text('Score: ${controller.guessedWord[reversedIndex].score}'),

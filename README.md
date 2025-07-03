@@ -1,16 +1,33 @@
-# flutter_course
+# Randomize Game
 
-A new Flutter project.
+A simple word-guessing game built with Flutter.
 
-## Getting Started
+## Game Description
+Randomize is a game where you have to guess a secret word by inputting a 4-letter word. The game determines the secret word from a predefined list of words. After each guess, the game provides feedback to help you guess the word correctly.
 
-This project is a starting point for a Flutter application.
+## Features
+* 4-letter word guessing game
+* Feedback after each guess to help you guess the word
+* Score tracking
+* Game history
 
-A few resources to get you started if this is your first Flutter project:
+## How to Play
+1. Input a 4-letter word in the input fields.
+2. Click the "Check Guess" button to submit your guess.
+3. The game will provide feedback after each guess.
+4. Keep guessing until you correctly guess the secret word.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Secret Words
+The game uses a predefined list of secret words, which are:
+* game
+* dart
+* play
+* code
+* tech
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies Used
+* Flutter
+* Dart
+
+## Appetize link
+* https://appetize.io/app/b_lxavue52lgas2fnsuwwoxuf4cy
