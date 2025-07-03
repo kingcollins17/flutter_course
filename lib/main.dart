@@ -1,5 +1,24 @@
-// ignore_for_file: avoid_print
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'presentation/pages/game_page.dart';
 
-import 'dart:async';
+void main() {
+  runApp(MyApp());
+}
 
-import 'async_try_catch_example.dart';
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      title: 'Word Guessing Game',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: GamePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
