@@ -1,14 +1,21 @@
-
-  import '../models/word_model.dart';
+import '../models/word_model.dart';
 
 List<WordModel> wordList = [
   WordModel(
     word: "love",
-    wordhints: ["Also means affection", "Can mean 'like deeply'", "Another word for fondness"],
+    wordhints: [
+      "It means affection",
+      "Can mean 'like deeply'",
+      "Another word for fondness",
+    ],
   ),
- WordModel(
+  WordModel(
     word: "code",
-    wordhints: ["Used in programming", "Also called script", "Synonym for syntax"],
+    wordhints: [
+      "Used in programming",
+      "Also called script",
+      "Synonym for syntax",
+    ],
   ),
   WordModel(
     word: "frog",
@@ -16,19 +23,35 @@ List<WordModel> wordList = [
   ),
   WordModel(
     word: "spin",
-    wordhints: ["Means to rotate", "Move in a circular motion", "Whirls around quickly"],
+    wordhints: [
+      "Means to rotate",
+      "Move in a circular motion",
+      "Whirls around quickly",
+    ],
   ),
   WordModel(
     word: "jump",
-    wordhints: ["A quick upward move", "Used in exercise", "Means to hop or leap"],
+    wordhints: [
+      "A quick upward move",
+      "Used in exercise",
+      "Means to hop or leap",
+    ],
   ),
   WordModel(
     word: "fire",
-    wordhints: ["Can burn things", "Produces heat and light", "Opposite of water"],
+    wordhints: [
+      "Can burn things",
+      "Produces heat and light",
+      "Opposite of water",
+    ],
   ),
   WordModel(
     word: "star",
-    wordhints: ["Seen at night", "Shines in the sky", "A celebrity is also called this"],
+    wordhints: [
+      "Seen at night",
+      "Shines in the sky",
+      "A celebrity is also called this",
+    ],
   ),
   WordModel(
     word: "milk",
@@ -36,8 +59,12 @@ List<WordModel> wordList = [
   ),
   WordModel(
     word: "rain",
-    wordhints: ["Falls from the sky", "Water droplets", "Can be light or heavy"],
-  ), 
+    wordhints: [
+      "Falls from the sky",
+      "Water droplets",
+      "Can be light or heavy",
+    ],
+  ),
   WordModel(
     word: "gold",
     wordhints: ["Precious metal", "Shiny and yellow", "Used in jewelry"],
