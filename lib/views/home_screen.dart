@@ -40,80 +40,12 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         )
-                        : SingleChildScrollView(
-                          reverse: true,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: controller.previousGuess.length,
-                            itemBuilder: (context, index) {
-                              final guess = controller.previousGuess[index];
-                              return ListTile(
-                                title: Text(
-                                  guess.word.toUpperCase(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        guess.hints == null
-                                            ? Colors.green
-                                            : Colors.red,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                subtitle:
-                                    guess.hints == null
-                                        ? Text(guess.feedback)
-                                        : Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(guess.feedback),
-                                            Text('hints'),
-                                            ...guess.hints!.map(
-                                              (e) => Text(
-                                                " - $e",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                              );
-                            },
-                          ),
-                        ),
+                        : historyDisplayWidget(controller),
               ),
               Obx(
                 () =>
                     controller.newGuessMessage.value
-                        ? SizedBox(
-                          height: 50,
-                          child: Column(
-                            children: [
-                              Text(
-                                'I have guessed a new word.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(text: 'Hint: '),
-                                    TextSpan(
-                                      text:
-                                          '\'${controller.secretWord.wordhints[0]}\'',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
+                        ? NewGuessMessage(controller: controller)
                         : SizedBox(height: 50),
               ),
               Row(
@@ -171,6 +103,82 @@ class HomeScreen extends StatelessWidget {
             size: controller.remainingTry.value == 0 ? 40 : 20,
           ),
         ),
+      ),
+    );
+  }
+
+  SingleChildScrollView historyDisplayWidget(GameController controller) {
+    return SingleChildScrollView(
+      reverse: true,
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: controller.previousGuess.length,
+        itemBuilder: (context, index) {
+          final guess = controller.previousGuess[index];
+          return ListTile(
+            title: Text(
+              guess.word.toUpperCase(),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: guess.hints == null ? Colors.green : Colors.red,
+                fontSize: 18,
+              ),
+            ),
+            subtitle:
+                guess.hints == null
+                    ? Text(guess.feedback)
+                    : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(guess.feedback),
+                        Text('hints'),
+                        ...guess.hints!.map(
+                          (e) => Text(
+                            " - $e",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class NewGuessMessage extends StatelessWidget {
+  const NewGuessMessage({super.key, required this.controller});
+
+  final GameController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: Column(
+        children: [
+          Text(
+            'I have guessed a new word.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'Hint: '),
+                TextSpan(
+                  text: '\'${controller.secretWord.wordhints[0]}\'',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
