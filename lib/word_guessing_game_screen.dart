@@ -38,7 +38,7 @@ class WordGuessingGameScreen extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () => controller.score.value =0,
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                      child: Text('Reset Score')
+                      child: Text('Reset Score', style: TextStyle(color: Colors.white))
                   )
                 ],
               ),

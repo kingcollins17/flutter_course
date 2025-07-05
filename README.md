@@ -6,6 +6,8 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
+Kindly find the link to my app preview: https://appetize.io/app/b_najeyuqfebf75ngmbvvvhksg6y
+
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)

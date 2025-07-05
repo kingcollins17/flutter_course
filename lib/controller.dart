@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class GameController extends GetxController{
 
-  final List<String> wordList = ['grace', 'play', 'wish', 'draw', 'deer', 'fear',
+  final List<String> wordList = ['gray', 'play', 'wish', 'draw', 'deer', 'fear',
     'join', 'idea', 'less', 'city', 'jump', 'high', 'form', 'earn', 'hope', 'line',
     'just', 'king', 'cake', 'cell', 'gift', 'fuel','door', 'heat', 'heal', 'lock'];
 
