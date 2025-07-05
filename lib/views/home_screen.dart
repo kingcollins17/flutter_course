@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           '4-Letter Word Guessing Game',
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
         ),
       ),
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w300,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               SizedBox(height: 5),
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Attempts Left: ${controller.remainingTry}",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                   Text.rich(
                     TextSpan(
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                           text: 'Score: ',
                           style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         TextSpan(
@@ -100,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                   labelText: "Enter 4-letter word",
                   labelStyle: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w400,
                     color: Colors.grey.shade600,
                   ),
                   border: OutlineInputBorder(),
