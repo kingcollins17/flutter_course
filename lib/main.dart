@@ -1,5 +1,7 @@
-// ignore_for_file: avoid_print
+import 'package:flutter/material.dart';
+import 'package:flutter_course/word_guessing_game.dart';
 
-import 'dart:async';
+void main() {
+  runApp(const WordGuessingGame());
+}
 
-import 'async_try_catch_example.dart';
