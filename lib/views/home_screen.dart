@@ -11,7 +11,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GameController controller = Get.find<GameController>();
     return Scaffold(
-      appBar: AppBar(title: Text('4-Letter Word Guessing Game')),
+      appBar: AppBar(
+        title: Text(
+          '4-Letter Word Guessing Game',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Obx(
@@ -27,14 +32,18 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 'I have guessed a 4-letter word.\n Try to guess the word. \nType your guess in the box below.\n\n Hint: ',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
                               SizedBox(height: 5),
                               Text(
                                 '\'${controller.secretWord.wordhints[0]}\'',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
@@ -51,8 +60,31 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Attempts Left: ${controller.remainingTry}"),
-                  Text("Score: ${controller.currentScore}"),
+                  Text(
+                    "Attempts Left: ${controller.remainingTry}",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Score: ',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${controller.currentScore}',
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 30, 80, 31),
+                            fontSize: 16,
+                            //      fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -66,6 +98,11 @@ class HomeScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   enabled: controller.remainingTry.value != 0,
                   labelText: "Enter 4-letter word",
+                  labelStyle: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.grey.shade600,
+                  ),
                   border: OutlineInputBorder(),
                 ),
               ),
