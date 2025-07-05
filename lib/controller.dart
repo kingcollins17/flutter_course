@@ -13,20 +13,23 @@ class GameController extends GetxController{
   final RxList<String> guessHistory = <String>[].obs;
   final TextEditingController guessController = TextEditingController();
   final RxBool gameOver = false.obs;
-  int attempts = 0;
+  RxInt attempts = 0.obs;
   int maxAttempts = 6;
+  RxBool isCorrectGuess = false.obs;
 
   @override void onInit() {
     super.onInit();
     generateSecretWord();
   }
 
+
   void generateSecretWord(){
     secretWord = wordList[Random().nextInt(wordList.length)];
     guessHistory.clear();
-    score.value = 0;
-    attempts = 0;
+    //score.value = 0;
+    attempts.value = 0;
     gameOver.value = false;
+    isCorrectGuess.value = false;
   }
 
   void resetGame(){
@@ -44,17 +47,32 @@ class GameController extends GetxController{
     return match;
   }
 
-  String generateHint(String guess){
-    StringBuffer hint = StringBuffer();
-    for(int i =0; i<4; i++){
-      if(guess[i] == secretWord[i]){
-        hint.write(guess[i]);
-      }else{
-        hint.write('_');
+  String generateHint(String guess) {
+    List<String> hint = List.filled(4, "_");
+    String lowerGuess = guess.toLowerCase();
+    String lowerSecret = secretWord.toLowerCase();
+
+    for (int i = 0; i < 4; i++) {
+      String targetLetter = lowerSecret[i];
+      if (lowerGuess.contains(targetLetter)) {
+        hint[i] = targetLetter;
       }
     }
-    return hint.toString();
+
+    return hint.join(' ');
   }
+
+  // String generateHint(String guess){
+  //   StringBuffer hint = StringBuffer();
+  //   for(int i =0; i<4; i++){
+  //     if(guess[i] == secretWord[i]){
+  //       hint.write(guess[i]);
+  //     }else{
+  //       hint.write('_');
+  //     }
+  //   }
+  //   return hint.toString();
+  // }
 
   void checkGuess(String guess){
     if(gameOver.value) return;
@@ -64,22 +82,26 @@ class GameController extends GetxController{
       return;
     }
 
-    attempts++;
+    attempts.value++;
 
     if(guess.toLowerCase() == secretWord){
+      isCorrectGuess.value = true;
       guessHistory.add('$guess - Correct! The secret word was $secretWord');
-      generateSecretWord();
+      score.value +=10;
+      //generateSecretWord();
     }else{
+      isCorrectGuess.value = false;
       int matches = countMatchingLetters(guess.toLowerCase());
-      String hint = generateHint(guess.toLowerCase());
+      String hint = generateHint(guess);
       guessHistory.add('$guess - $matches matched | Hint: $hint');
     }
 
-    if(attempts>= maxAttempts){
+    if(attempts.value>= maxAttempts){
       gameOver.value = true;
       guessHistory.add('Game over! The word was $secretWord');
+      isCorrectGuess.value = false;
     }
-    guessController.clear();
+    //guessController.clear();
   }
 
 
