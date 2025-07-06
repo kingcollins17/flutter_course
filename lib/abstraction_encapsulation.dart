@@ -1,56 +1,104 @@
-// Abstract class (Abstraction)
-abstract class Vehicle {
-  void startEngine(); // abstract method
-  void stopEngine(); // abstract method
+// class Certificate {}
 
-  void drive() {
-    print('Driving...');
-  }
-}
+// abstract interface class Repository {
+//   List<Certificate> getCerticates();
 
-// Concrete class implementing the abstraction
-class Car extends Vehicle {
-  // Encapsulation: private property
-  String _engineStatus = 'off';
+//   void save(Certificate value);
+// }
 
-  // Getter
-  String get engineStatus => _engineStatus;
+// class CloudRepository implements Repository {
+//   @override
+//   List<Certificate> getCerticates() {
+//     return [];
+//   }
 
-  // Setter with some validation logic
-  set engineStatus(String status) {
-    if (status == 'on' || status == 'off') {
-      _engineStatus = status;
-    } else {
-      print('Invalid status!');
-    }
-  }
+//   @override
+//   void save(Certificate value) {
+//     print('Saved certificate to cloud');
+//   }
+// }
 
-  @override
-  void startEngine() {
-    _engineStatus = 'on';
-    print('Car engine started');
-  }
+// class LocalStorageRepository implements Repository {
+//   @override
+//   List<Certificate> getCerticates() {
+//     return [];
+//   }
 
-  @override
-  void stopEngine() {
-    _engineStatus = 'off';
-    print('Car engine stopped');
-  }
-}
+//   @override
+//   void save(Certificate value) {
+//     print('Saved cerficate to users device');
+//   }
+// }
 
-void main() {
-  Car myCar = Car();
+// // Abstract class (Abstraction)
+// abstract class Vehicle {
+//   void startEngine() {} // abstract method
+//   void stopEngine() {} // abstract method
 
-  print('Initial engine status: ${myCar.engineStatus}');
+//   void drive() {}
+// }
 
-  myCar.startEngine(); // Abstract method implementation
-  print('Engine status: ${myCar.engineStatus}');
+// // Concrete class implementing the abstraction
+// // class Car extends Vehicle {
+// //   // // Encapsulation: private property
+// //   String _engineStatus = 'off';
 
-  myCar.drive(); // Concrete method from abstract class
+// //   int _count = 0;
 
-  myCar.engineStatus = 'invalid'; // Fails due to validation
-  print('Engine status after invalid set: ${myCar.engineStatus}');
+// //   // Getter
+// //   String get engineStatus => _engineStatus;
 
-  myCar.stopEngine();
-  print('Final engine status: ${myCar.engineStatus}');
-}
+// //   // Setter with some validation logic
+// //   set engineStatus(String status) {
+// //     if (status == 'on' || status == 'off') {
+// //       _engineStatus = status;
+// //     } else {
+// //       print('Invalid status!');
+// //     }
+// //   }
+
+// //   @override
+// //   void startEngine() {
+// //     _engineStatus = 'on';
+// //     print('Car engine started');
+// //   }
+
+// //   @override
+// //   void stopEngine() {
+// //     _engineStatus = 'off';
+// //     print('Car engine stopped');
+// //   }
+
+// //   @override
+// //   void drive() {}
+// // }
+
+// Repository injectCloudRepo() {
+//   return CloudRepository();
+// }
+
+// Repository injectLocalRepo() {
+//   return LocalStorageRepository();
+// }
+
+// void main() {
+//   final Repository repo = injectCloudRepo();
+
+//   repo.getCerticates();
+//   repo.save(Certificate());
+
+//   // Car myCar = Car();
+
+//   // print('Initial engine status: ${myCar.engineStatus}');
+
+//   // myCar.startEngine(); // Abstract method implementation
+//   // print('Engine status: ${myCar.engineStatus}');
+
+//   // myCar.drive(); // Concrete method from abstract class
+
+//   // myCar.engineStatus = 'invalid'; // Fails due to validation
+//   // print('Engine status after invalid set: ${myCar.engineStatus}');
+
+//   // myCar.stopEngine();
+//   // print('Final engine status: ${myCar.engineStatus}');
+// }

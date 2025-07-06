@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "961865861406",
+    "project_id": "example-699af",
+    "storage_bucket": "example-699af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961865861406:android:bbfecc0134f229cfc9a10f",
+        "android_client_info": {
+          "package_name": "com.kodecamp.flutter_course"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBilZe7vcc3AfhguRS1c4KVPw7-AXsK0kg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
