@@ -8,7 +8,11 @@ plugins {
 android {
     namespace = "com.kodecamp.flutter_course"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "29.0.13113456"
+    android {
+    // ... other settings
+    ndkVersion "29.0.13113456" // add this to use a known working version
+}
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
