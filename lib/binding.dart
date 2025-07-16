@@ -8,6 +8,6 @@ class GameBinding extends Bindings{
   }
   
   void injectGameController(){
-    Get.lazyPut(() => GameController());
+    Get.lazyPut(() => GameController(), fenix: true);
   }
 }

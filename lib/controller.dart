@@ -78,7 +78,9 @@ class GameController extends GetxController{
     if(gameOver.value) return;
 
     if(guess.length !=4){
-      Get.snackbar('Invalid Guess', 'Please enter a 4-letter word');
+      if(!Get.testMode){
+        Get.snackbar('Invalid Guess', 'Please enter a 4-letter word');
+      }
       return;
     }
 
