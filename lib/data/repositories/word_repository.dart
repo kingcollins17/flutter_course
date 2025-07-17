@@ -42,6 +42,7 @@ class WordRepository {
   }
 
   bool isValidWord(String word) {
-    return word.length == 4 && word.isNotEmpty;
+    final regex = RegExp(r'^[a-zA-Z]{4}$');
+    return regex.hasMatch(word);
   }
 }

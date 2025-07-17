@@ -30,13 +30,15 @@ class GameController extends GetxController {
   void submitGuess() {
     final guess = textController.text.trim();
     if (guess.isEmpty || guess.length != 4) {
-      Get.snackbar(
-        'Invalid Input',
-        'Please enter a 4-letter word',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
-      );
+      if (Get.overlayContext != null) {
+        Get.snackbar(
+          'Invalid Input',
+          'Please enter a 4-letter word',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+      }
       return;
     }
 
@@ -45,23 +47,27 @@ class GameController extends GetxController {
 
     final lastGuess = guesses.last;
     if (lastGuess.isCorrect) {
-      Get.snackbar(
-        '🎉 Correct!',
-        'Well done! You earned 10 points!',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        duration: Duration(seconds: 2),
-      );
+      if (Get.overlayContext != null) {
+        Get.snackbar(
+          '🎉 Correct!',
+          'Well done! You earned 10 points!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: Duration(seconds: 2),
+        );
+      }
     } else {
-      Get.snackbar(
-        '❌ Try Again',
-        'Keep going! You can do it!',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        duration: Duration(seconds: 1),
-      );
+      if (Get.overlayContext != null) {
+        Get.snackbar(
+          '❌ Try Again',
+          'Keep going! You can do it!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: Duration(seconds: 1),
+        );
+      }
     }
   }
 
