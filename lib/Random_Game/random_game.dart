@@ -27,64 +27,68 @@ class _RandomGameState extends State<RandomGame> {
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('WELCOME TO RANDOMIZE',
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 98, 9, 241),
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 20),
-                Center(
-                  child: Text('This is a game where you can guess a secret word! and earn points.',
+                  Text(
+                    'WELCOME TO RANDOMIZE',
                     style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+                      color: const Color.fromARGB(255, 98, 9, 241),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Text('You will be given a hint and you have to guess the word.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                  SizedBox(height: 20),
+                  Center(
+                    child: Text(
+                      'This is a game where you can guess a secret word! and earn points.',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Text('Can you guess the secret word?',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                  SizedBox(height: 20),
+                  Text(
+                    'You will be given a hint and you have to guess the word.',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
-                ),
-                SizedBox(height: 20,),
-                Text('Enter the Word below to guess the secret word:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                  SizedBox(height: 20),
+                  Text(
+                    'Can you guess the secret word?',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: 
-                  List.generate(4, (index)=> _buildRandonBoxUi(context, index))
-                ),
-                SizedBox(height: 10,),
-                ElevatedButton(
-                  onPressed: (){
-                    controller.guessSecretWords( controller.textControllers.map((e) => e.text).join());
-                }, 
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 98, 9, 241),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),),
-                child: Text('Check Guess',style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),))
+                  SizedBox(height: 20),
+                  Text(
+                    'Enter the Word below to guess the secret word:',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      4,
+                      (index) => _buildRandonBoxUi(context, index),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      // controller.guessSecretWords( controller.textControllers.map((e) => e.text).join());
+                      controller.validateGuess();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 98, 9, 241),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      'Check Guess',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -94,23 +98,21 @@ class _RandomGameState extends State<RandomGame> {
     );
   }
 
-  Widget _buildRandonBoxUi(BuildContext context,int index){
+  Widget _buildRandonBoxUi(BuildContext context, int index) {
     return Column(
       children: [
         SizedBox(
-        height: 68.0,
-        width: 64.0,
-        child: 
-           TextFormField(
+          height: 68.0,
+          width: 64.0,
+          child: TextFormField(
             controller: controller.textControllers[index],
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value){
-              if(value.length == 1){
+            onChanged: (value) {
+              if (value.length == 1) {
                 FocusScope.of(context).nextFocus();
-              }else if (value.isEmpty) {
+              } else if (value.isEmpty) {
                 FocusScope.of(context).previousFocus();
               }
-          
             },
             keyboardType: TextInputType.text,
             textAlign: TextAlign.center,
@@ -118,38 +120,28 @@ class _RandomGameState extends State<RandomGame> {
               LengthLimitingTextInputFormatter(1),
               FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
             ],
-            decoration: boxDecoration()
+            decoration: boxDecoration(),
           ),
-        
         ),
-        
       ],
     );
   }
 
-  InputDecoration boxDecoration(){
+  InputDecoration boxDecoration() {
     return InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    width: 1,
-                    color:  Colors.grey,
-                  ),
-            ),
-            focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    width: 1,
-                  )
-                ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 1, color: Colors.grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 1),
+      ),
 
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    width: 1,
-                  )
-                )
-                
-          );
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 1),
+      ),
+    );
   }
 }

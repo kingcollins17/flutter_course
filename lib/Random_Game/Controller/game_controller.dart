@@ -6,7 +6,10 @@ import 'package:get/get.dart';
 
 class GameController extends GetxController {
   var selectedIndex = 0.obs;
-  List<TextEditingController> textControllers = List.generate(4, (index) => TextEditingController());
+  List<TextEditingController> textControllers = List.generate(
+    4,
+    (index) => TextEditingController(),
+  );
   final List<String> _words = ['game', 'dart', 'code', 'tech', 'play'];
   final _isGuessedWordCorrect = false.obs;
   final _feedBack = ''.obs;
@@ -16,27 +19,49 @@ class GameController extends GetxController {
 
   String get secretWord => _secretWord.value;
   get isGuessedWordCorrect => _isGuessedWordCorrect.value;
-  get feedBack => _feedBack.value;
-  get score => _score.value;
+  String get feedBack => _feedBack.value;
+  int get score => _score.value;
   List<Guess> get guessedWord => _guessedWords;
+  List<String> get words => _words;
 
-   changePageIndex(int index){
+  changePageIndex(int index) {
     selectedIndex.value = index;
   }
 
-
   @override
-  void onInit(){
+  void onInit() {
     super.onInit();
-     _secretWord.value = _words[Random().nextInt(_words.length)];
+    _secretWord.value = _words[Random().nextInt(_words.length)];
   }
-    void clearTextFields(){
-    for (var controller in textControllers){
+
+  void setTextControllerText(int index, String text) {
+    textControllers[index].text = text;
+  }
+
+  void clearTextFields() {
+    for (var controller in textControllers) {
       controller.clear();
     }
   }
 
-  void guessSecretWords(String guess){
+  void validateGuess() {
+    String guess = textControllers.map((e) => e.text).join();
+    if (guess.length != 4) {
+      _feedBack.value = 'Word must be 4 letters long.';
+      print('please enter a 4-letter word');
+      // Get.snackbar(
+      //   'Invalid Guess',
+      //   'Please enter a 4-letter word.',
+      //   snackPosition: SnackPosition.TOP,
+      //   backgroundColor: Colors.red,
+      //   colorText: Colors.white,
+      // );
+    } else {
+      guessSecretWords(guess);
+    }
+  }
+
+  void guessSecretWords(String guess) {
     print('beginning of guessSecretWords');
     print('secret word is: =========== $_secretWord');
     int scoreForthisGuess = 0;
@@ -44,55 +69,68 @@ class GameController extends GetxController {
       if (guess.toLowerCase() == _secretWord.value.toLowerCase()) {
         scoreForthisGuess = 10;
         _score.value += 10;
-        
+
         _isGuessedWordCorrect.value = true;
         _feedBack.value = 'Congratulations! You guessed the secret word!';
-        Get.snackbar(
-          'Correct Guess',
-          'You guessed the secret word!\n score: ${_score.value}',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
+        print(
+          'Correct Guess,You guessed the secret word!\n score: ${_score.value}',
         );
-        
+        // Get.snackbar(
+        //   'Correct Guess',
+        //   'You guessed the secret word!\n score: ${_score.value}',
+        //   snackPosition: SnackPosition.TOP,
+        //   backgroundColor: Colors.green,
+        //   colorText: Colors.white,
+        // );
+
         clearTextFields();
-       _pickNewSecretWord();
-      }else{
+        _pickNewSecretWord();
+      } else {
         _isGuessedWordCorrect.value = false;
         scoreForthisGuess = 0;
-        Get.snackbar(
-          'Incorrect Guess',
-          'The word is in the list but not the secret word.',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+        print(
+          'Incorrect Guess,The word is in the list but not the secret word.',
         );
+        // Get.snackbar(
+        //   'Incorrect Guess',
+        //   'The word is in the list but not the secret word.',
+        //   snackPosition: SnackPosition.TOP,
+        //   backgroundColor: Colors.red,
+        //   colorText: Colors.white,
+        // );
         clearTextFields();
-        _feedBack.value = 'The word is in the list but not the secret word. Please Try again!';
+        _feedBack.value =
+            'The word is in the list but not the secret word. Please Try again!';
       }
-    }else{
+    } else {
       _feedBack.value = 'Word is not in the list. Please try again.';
       _isGuessedWordCorrect.value = false;
       scoreForthisGuess = 0;
-      Get.snackbar(
-        'Invalid Guess',
-        'The word is not in the list. Please try again.',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      print('Invalid Guess,The word is not in the list. Please try again.');
+      // Get.snackbar(
+      //   'Invalid Guess',
+      //   'The word is not in the list. Please try again.',
+      //   snackPosition: SnackPosition.TOP,
+      //   backgroundColor: Colors.red,
+      //   colorText: Colors.white,
+      // );
       clearTextFields();
     }
 
-    _guessedWords.add(Guess(guess: guess, feedback: _feedBack.value, score: scoreForthisGuess, isCorrect: isGuessedWordCorrect));
-
+    _guessedWords.add(
+      Guess(
+        guess: guess,
+        feedback: _feedBack.value,
+        score: scoreForthisGuess,
+        isCorrect: isGuessedWordCorrect,
+      ),
+    );
   }
-  
+
   void _pickNewSecretWord() {
-  final availableWords = _words.where((w) => w != _secretWord.value).toList();
-  _secretWord.value = availableWords[DateTime.now().microsecondsSinceEpoch % availableWords.length];
+    final availableWords = _words.where((w) => w != _secretWord.value).toList();
+    _secretWord.value =
+        availableWords[DateTime.now().microsecondsSinceEpoch %
+            availableWords.length];
+  }
 }
-}
-  
-
-
