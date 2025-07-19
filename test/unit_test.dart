@@ -20,23 +20,23 @@ void main() async {
   });
 
   group('Testing the Guess', () {
-    test('Test Guess is right', () async {
+    test('Test for when Guess is right', () async {
       controller.assessGuess('love');
       expect(controller.isCorrect!, equals(true));
     });
-    test('Test Guess is wrong', () async {
+    test('Test for when Guess is wrong', () async {
       controller.assessGuess('like');
       expect(controller.isCorrect!, equals(false));
     });
-    test('Guess is only 4-letters', () async {
+    test('Test to ensure Guess comprise of only 4-letters', () async {
       controller.assessGuess('coosl');
       expect(controller.isCorrect, isNull);
     });
-    test('Guess is not less or more than 4 letters ', () async {
+    test('Test to ensure Guess is not less or more than 4 letters ', () async {
       controller.assessGuess('cool');
       expect(controller.isCorrect, isNotNull);
     });
-    test('Guess is only letters ', () async {
+    test('Test to ensure Guess comprises of only letters ', () async {
       controller.assessGuess('c(1l');
       expect(controller.isCorrect, isNull);
     });
@@ -55,9 +55,17 @@ void main() async {
     });
   });
 
-  test('Guess History test', () async {
-    final initialHistoryLength = controller.previousGuess.length;
-    controller.assessGuess('love');
-    expect(controller.previousGuess.length, equals(initialHistoryLength + 1));
+  group('Guess History test', () {
+    test('Guess History is update for accurate guess', () async {
+      final initialHistoryLength = controller.previousGuess.length;
+      controller.assessGuess('love');
+      expect(controller.previousGuess.length, equals(initialHistoryLength + 1));
+    });
+
+    test('Guess History is update for inaccurate guess', () async {
+      final initialHistoryLength = controller.previousGuess.length;
+      controller.assessGuess('lake');
+      expect(controller.previousGuess.length, equals(initialHistoryLength + 1));
+    });
   });
 }
