@@ -9,6 +9,7 @@ import '../models/guess_model.dart';
 class GameController extends GetxController {
   late WordModel secretWord;
   var remainingTry = 2.obs;
+  bool? isCorrect;
   var previousGuess = <GuessModel>[].obs;
   var currentScore = 0.obs;
   final Box guessBox = Hive.box("guesses");
@@ -43,7 +44,7 @@ class GameController extends GetxController {
       gameSnackBar(
         'Congratulations',
         'You have completed the game. You scored ${currentScore.value} points!\nRestart the Game',
-        Colors.green,
+        isCorrect: true,
         duration: Duration(seconds: 3),
       );
       gameOver.value = true;
@@ -56,22 +57,30 @@ class GameController extends GetxController {
     return remainingWords.removeLast();
   }
 
-  void assessGuess(String guess) {
-    if (guess.length != 4 || remainingTry.value == 0) return;
-    final String currentWord = secretWord.word;
-    final isCorrect = guess == currentWord;
-    final feedback = isCorrect ? "✅ Correct!" : "❌ Try again!";
-    final hints = isCorrect ? null : generateHints(guess);
+  bool isAlphabetOnly(String input) {
+    return RegExp(r'^[a-zA-Z]+$').hasMatch(input);
+  }
 
+  void assessGuess(String guess) {
+    if (!isAlphabetOnly(guess) ||
+        guess.length != 4 ||
+        remainingTry.value == 0) {
+      return;
+    }
+    isCorrect = false;
+    final String currentWord = secretWord.word;
+    isCorrect = guess.toLowerCase().trim() == currentWord.toLowerCase().trim();
+    final feedback = isCorrect! ? "✅ Correct!" : "❌ Try again!";
+    final hints = isCorrect! ? null : generateHints(guess);
     previousGuess.add(
       GuessModel(word: guess, feedback: feedback, hints: hints),
     );
     guessBox.put('history', previousGuess.toList());
 
-    if (isCorrect) {
+    if (isCorrect!) {
       currentScore.value += 10;
       guessBox.put('score', currentScore.value);
-      gameSnackBar('', "10 points added", Colors.green);
+      gameSnackBar('', "10 points added", isCorrect: true);
       getNewWord();
       newGuessMessage.value = true;
     } else {
@@ -80,7 +89,6 @@ class GameController extends GetxController {
         gameSnackBar(
           'Game Over',
           'You scored ${currentScore.value} points!\n Restart the Game',
-          Colors.red,
           duration: Duration(seconds: 7),
         );
         gameOver.value = true;
@@ -95,20 +103,18 @@ class GameController extends GetxController {
     return hints.take(1).toList();
   }
 
-  SnackbarController gameSnackBar(
+  void gameSnackBar(
     String titleString,
-    String messageString,
-    Color backgroundColor, {
-    SnackPosition? position = SnackPosition.TOP,
+    String messageString, {
+    bool isCorrect = false,
     Duration? duration = const Duration(seconds: 2),
   }) {
-    return Get.snackbar(
+    Get.snackbar(
       titleString,
       messageString,
       colorText: Colors.white,
-      backgroundColor: backgroundColor,
+      backgroundColor: isCorrect ? Colors.green : Colors.red,
       duration: duration,
-      snackPosition: position,
     );
   }
 
