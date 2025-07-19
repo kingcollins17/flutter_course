@@ -1,4 +1,4 @@
-# flutter_course
+# wordx
 
 A new Flutter project.
 
