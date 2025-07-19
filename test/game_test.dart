@@ -7,10 +7,8 @@ void main() {
   late GameController controller;
 
   setUp(() {
-    // Get.reset();
     Get.put(GameController());
     controller = Get.find<GameController>();
-    //  controller.guessedWord.clear();
   });
 
   tearDown(() {

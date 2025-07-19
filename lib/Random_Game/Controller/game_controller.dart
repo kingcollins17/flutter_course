@@ -44,18 +44,25 @@ class GameController extends GetxController {
     }
   }
 
+  void showSnackBar(String title, String message) {
+    if (Get.context != null) {
+      Get.snackbar(
+        title,
+        message,
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } else {
+      print('$title: $message');
+    }
+  }
+
   void validateGuess() {
     String guess = textControllers.map((e) => e.text).join();
     if (guess.length != 4) {
       _feedBack.value = 'Word must be 4 letters long.';
-      print('please enter a 4-letter word');
-      // Get.snackbar(
-      //   'Invalid Guess',
-      //   'Please enter a 4-letter word.',
-      //   snackPosition: SnackPosition.TOP,
-      //   backgroundColor: Colors.red,
-      //   colorText: Colors.white,
-      // );
+      showSnackBar('Invalid Guess', 'Word must be 4 letters long.');
     } else {
       guessSecretWords(guess);
     }
@@ -72,32 +79,21 @@ class GameController extends GetxController {
 
         _isGuessedWordCorrect.value = true;
         _feedBack.value = 'Congratulations! You guessed the secret word!';
-        print(
-          'Correct Guess,You guessed the secret word!\n score: ${_score.value}',
+        showSnackBar(
+          'Correct Guess',
+          'You guessed the secret word!\n score: ${_score.value}',
         );
-        // Get.snackbar(
-        //   'Correct Guess',
-        //   'You guessed the secret word!\n score: ${_score.value}',
-        //   snackPosition: SnackPosition.TOP,
-        //   backgroundColor: Colors.green,
-        //   colorText: Colors.white,
-        // );
 
         clearTextFields();
         _pickNewSecretWord();
       } else {
         _isGuessedWordCorrect.value = false;
         scoreForthisGuess = 0;
-        print(
-          'Incorrect Guess,The word is in the list but not the secret word.',
+        showSnackBar(
+          'Incorrect Guess',
+          'The word is in the list but not the secret word.',
         );
-        // Get.snackbar(
-        //   'Incorrect Guess',
-        //   'The word is in the list but not the secret word.',
-        //   snackPosition: SnackPosition.TOP,
-        //   backgroundColor: Colors.red,
-        //   colorText: Colors.white,
-        // );
+
         clearTextFields();
         _feedBack.value =
             'The word is in the list but not the secret word. Please Try again!';
@@ -106,14 +102,11 @@ class GameController extends GetxController {
       _feedBack.value = 'Word is not in the list. Please try again.';
       _isGuessedWordCorrect.value = false;
       scoreForthisGuess = 0;
-      print('Invalid Guess,The word is not in the list. Please try again.');
-      // Get.snackbar(
-      //   'Invalid Guess',
-      //   'The word is not in the list. Please try again.',
-      //   snackPosition: SnackPosition.TOP,
-      //   backgroundColor: Colors.red,
-      //   colorText: Colors.white,
-      // );
+      showSnackBar(
+        'Invalid Guess',
+        'The word is not in the list. Please try again.',
+      );
+
       clearTextFields();
     }
 
