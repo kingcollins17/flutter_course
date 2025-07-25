@@ -1,11 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,13 +23,7 @@ class AuthServiceImpl extends AuthService {
   final _auth = FirebaseAuth.instance;
 
   @override
-  Future<void> signIn(String email, String password) async {
-    final credential = await _auth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    final user = credential.user;
-  }
+  Future<void> signIn(String email, String password) async {}
 
   @override
   Future<void> signUp(String email, String password) async {
@@ -72,8 +63,10 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
@@ -81,35 +74,19 @@ class _AuthScreenState extends State<AuthScreen> {
   final _passwordController = TextEditingController();
   final _authService = AuthServiceImpl();
   bool _isSignIn = true;
-  bool _isLoading = false;
 
-  Future<void> _signUp() async {
-    try {
-      setState(() => _isLoading = false);
-      final email = _emailController.text;
-      final password = _passwordController.text;
-      await _authService.signUp(email, password);
-      _showSnackBar('Signed up', isError: true);
-    } catch (e) {
-      _showSnackBar(e.toString(), isError: true);
-    } finally {
-      setState(() => _isLoading = false);
-    }
-  }
+  Future<void> _signUp() async {}
 
   Future<void> _signIn() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     try {
-      setState(() => _isLoading = true);
       await _authService.signIn(email, password);
 
       _showSnackBar('Signed in', isError: true);
     } catch (e) {
       _showSnackBar(e.toString(), isError: true);
-    } finally {
-      setState(() => _isLoading = false);
-    }
+    } finally {}
   }
 
   @override
@@ -183,22 +160,6 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  String _getErrorMessage(String error) {
-    if (error.contains('user-not-found')) {
-      return 'No account found with this email';
-    } else if (error.contains('wrong-password')) {
-      return 'Incorrect password';
-    } else if (error.contains('email-already-in-use')) {
-      return 'An account already exists with this email';
-    } else if (error.contains('weak-password')) {
-      return 'Password is too weak';
-    } else if (error.contains('invalid-email')) {
-      return 'Invalid email address';
-    } else {
-      return 'An error occurred. Please try again';
-    }
   }
 }
 
