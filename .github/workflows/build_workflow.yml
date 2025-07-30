@@ -44,3 +44,28 @@ jobs:
 
       - name: Run flutter tests
         run:  flutter test
+
+  build_apk:
+    name: Generate release APK
+    runs-on:  ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel:  stable
+
+      - name: Install dependencies
+        run:  flutter pub get
+
+      - name: Build release APK
+        run:  flutter build apk --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
