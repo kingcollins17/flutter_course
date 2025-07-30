@@ -8,6 +8,7 @@ on:
 
 jobs:
   lint:
+    name: Analyze Code
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +25,22 @@ jobs:
 
       - name: Run linter
         run:  flutter analyze
+
+  test:
+    name: Run Tests
+    runs-on:  ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel:  stable
+
+      - name: Install dependencies
+        run:  flutter pub get
+
+      - name: Run flutter tests
+        run:  flutter test
