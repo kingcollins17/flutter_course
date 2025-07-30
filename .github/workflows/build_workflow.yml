@@ -2,9 +2,9 @@ name: Word Guessing Game Workflow File
 
 on:
   push:
-    branches: [ngozi]
+    branches: ['*']
   pull_request:
-    branches: [ngozi]
+    branches: ['*']
 
 jobs:
   lint:
