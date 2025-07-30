@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_course/Random_Game/Controller/game_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -99,9 +98,9 @@ void main() {
       );
       expect(controller.guessedWord[1].score, 10);
       expect(controller.guessedWord[1].isCorrect, true);
-      for (var guess in controller.guessedWord) {
-        print('Guess: ${guess.guess}, Feedback: ${guess.feedback}');
-      }
+      // for (var guess in controller.guessedWord) {
+      //   print('Guess: ${guess.guess}, Feedback: ${guess.feedback}');
+      // }
       expect(controller.guessedWord.length, 2);
     });
   });

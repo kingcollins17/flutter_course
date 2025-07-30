@@ -54,7 +54,7 @@ class GameController extends GetxController {
         colorText: Colors.white,
       );
     } else {
-      print('$title: $message');
+      //   print('$title: $message');
     }
   }
 
@@ -69,8 +69,8 @@ class GameController extends GetxController {
   }
 
   void guessSecretWords(String guess) {
-    print('beginning of guessSecretWords');
-    print('secret word is: =========== $_secretWord');
+    // print('beginning of guessSecretWords');
+    // print('secret word is: =========== $_secretWord');
     int scoreForthisGuess = 0;
     if (_words.contains(guess.toLowerCase())) {
       if (guess.toLowerCase() == _secretWord.value.toLowerCase()) {

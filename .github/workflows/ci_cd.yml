@@ -2,28 +2,13 @@ name: Game CI/CD Pipeline
 
 on:
   push:
-    branches: [ '*' ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ '*' ]
+    branches:
+      - '*'
 
 jobs:
-  run-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Run Tests
-        run: flutter test
-
   lint-code:
     runs-on: ubuntu-latest
     steps:
@@ -41,9 +26,27 @@ jobs:
       - name: Lint Code
         run: flutter analyze
 
+  run-tests:
+    runs-on: ubuntu-latest
+    needs: lint-code
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
   build-apk:
     runs-on: ubuntu-latest
-    needs: [run-tests, lint-code]
+    needs: [run-tests]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
