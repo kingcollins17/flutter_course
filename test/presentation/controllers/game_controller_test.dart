@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 import 'package:flutter_course/presentation/controllers/game_controller.dart';
 import '../../test_helpers/test_helper.dart';
 
