@@ -31,8 +31,11 @@ jobs:
     - name: Run Tests
       run: flutter test
 
-    - name: Accept Android SDK licenses
-      run: flutter doctor --android-licenses
+    - name: Install Android SDK licenses script
+      run: echo y | sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+
+    - name: Accept Android SDK Licenses (Flutter)
+      run: yes | flutter doctor --android-licenses
 
     - name: Build Release APK
       run: flutter build apk --release
