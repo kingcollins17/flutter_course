@@ -31,6 +31,9 @@ jobs:
     - name: Run Tests
       run: flutter test
 
+    - name: Accept Android SDK Licenses
+      run: yes | sdkmanager --licenses
+
     - name: Build Release APK
       run: flutter build apk --release
 
