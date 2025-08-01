@@ -14,9 +14,9 @@ Stream<String> getMessages() async* {
 
 void main() async {
   // === 1. Creating a simple single-subscription stream ===
-  Stream<int> simpleStream = Stream.fromIterable([1, 2, 3, 4, 5]);
+  /* Stream<int> simpleStream = Stream.fromIterable([1, 2, 3, 4, 5]);
 
-  print('--- Listening to simpleStream ---');
+  //print'--- Listening to simpleStream ---');
   simpleStream.listen(
     (data) => print('simpleStream data: $data'),
     onError: (err) => print('simpleStream error: $err'),
@@ -66,5 +66,5 @@ void main() async {
 
   broadcastController.sink.add('Hello from broadcast controller');
   broadcastController.sink.add('Another broadcast event');
-  broadcastController.close();
+  broadcastController.close();*/
 }

@@ -4,7 +4,7 @@ abstract class Vehicle {
   void stopEngine(); // abstract method
 
   void drive() {
-    print('Driving...');
+    // print('Driving...');
   }
 }
 
@@ -21,36 +21,36 @@ class Car extends Vehicle {
     if (status == 'on' || status == 'off') {
       _engineStatus = status;
     } else {
-      print('Invalid status!');
+      //   //print'Invalid status!');
     }
   }
 
   @override
   void startEngine() {
     _engineStatus = 'on';
-    print('Car engine started');
+    //print'Car engine started');
   }
 
   @override
   void stopEngine() {
     _engineStatus = 'off';
-    print('Car engine stopped');
+    //print'Car engine stopped');
   }
 }
 
 void main() {
   Car myCar = Car();
 
-  print('Initial engine status: ${myCar.engineStatus}');
+  //print'Initial engine status: ${myCar.engineStatus}');
 
   myCar.startEngine(); // Abstract method implementation
-  print('Engine status: ${myCar.engineStatus}');
+  //print'Engine status: ${myCar.engineStatus}');
 
   myCar.drive(); // Concrete method from abstract class
 
   myCar.engineStatus = 'invalid'; // Fails due to validation
-  print('Engine status after invalid set: ${myCar.engineStatus}');
+  //print'Engine status after invalid set: ${myCar.engineStatus}');
 
   myCar.stopEngine();
-  print('Final engine status: ${myCar.engineStatus}');
+  //print'Final engine status: ${myCar.engineStatus}');
 }
