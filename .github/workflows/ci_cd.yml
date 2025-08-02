@@ -37,8 +37,8 @@ jobs:
     - name: Accept Android SDK Licenses (Flutter)
       run: yes | flutter doctor --android-licenses
 
-    - name: Build Release APK
-      run: flutter build apk --release
+    - name: Build APK
+      run: flutter build apk --release -t lib/word_guess_game/main.dart
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
