@@ -3,14 +3,14 @@ name: Game Workflow CI/CD
 on:
   push:
     branches:
-      - '*'
-
+      - '**'
+      
   pull_request:
     branches:
-      - '*'
+      - '**'
 
 jobs:
-  lint:
+  lint_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,20 @@ jobs:
       
       - name: Analyze Code
         run: flutter analyze
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+      
+      - name: Run test cases
+        run: flutter test
