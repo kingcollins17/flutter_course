@@ -2,10 +2,12 @@ name: Game Workflow CI/CD
 
 on:
   push:
-    branches: ['*']
+    branches:
+      - '*'
 
   pull_request:
-    branches: ['*']
+    branches:
+      - '*'
 
 jobs:
   lint:
@@ -22,7 +24,6 @@ jobs:
 
       - name: Install Dependencies
         run: flutter pub get
-
       
       - name: Analyze Code
         run: flutter analyze
