@@ -38,10 +38,10 @@ jobs:
       run: yes | flutter doctor --android-licenses
 
     - name: Build APK
-      run: flutter build apk --release -t lib/word_guess_game/main.dart
+      run: flutter build apk --debug -t lib/word_guess_game/main.dart
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: release-apk
-        path: build/app/outputs/flutter-apk/app-release.apk
+        name: word-guessing-app-debug-apk
+        path: build/app/outputs/flutter-apk/app-debug.apk
