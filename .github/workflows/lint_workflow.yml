@@ -6,11 +6,12 @@ on:
       
   pull_request:
     branches:
-       
-  
+      - '**'
+
 jobs:
-  lints test:
+  lint_test:
     runs-on: ubuntu-latest
+
 
     steps:
     - name: Checkout Repository
