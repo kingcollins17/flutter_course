@@ -3,12 +3,10 @@ name: Game Workflow CI/CD
 on:
   push:
     branches:
-      - "**"    
-      -[4 word game task shonibare]    
+      
   pull_request:
     branches:
-      - "**"     
-      -[4 word game task shonibare]     
+       
   
 jobs:
   lints test:
@@ -32,4 +30,4 @@ jobs:
     - name: Analyze Code
       run: flutter analyze
 
- 
+   
