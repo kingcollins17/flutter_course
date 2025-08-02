@@ -32,8 +32,36 @@ jobs:
         run: flutter analyze
   tests:
     runs-on: ubuntu-latest
-    needs: lint_test
-    steps:
     
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+      
       - name: Run test cases
         run: flutter test
+
+  build_appk:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+      
+      - name: Build APK
+        run: flutter build apk --release
